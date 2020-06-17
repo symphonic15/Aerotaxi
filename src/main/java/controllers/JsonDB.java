@@ -3,6 +3,7 @@ package controllers;
 import io.jsondb.JsonDBTemplate;
 
 import java.io.File;
+import java.util.List;
 
 public class JsonDB {
     // Path de archivos json
@@ -42,5 +43,15 @@ public class JsonDB {
     // Retorna la instancia con el id y tipo definido
     public Object find(int id, Class type) {
         return this.jsonDBInstance().findById(id, type);
+    }
+
+    // Retorna todas las instancias en el archivo json
+    public List<Object> findAll(Class type) {
+        return this.jsonDBInstance().findAll(type);
+    }
+
+    // Retorna una o mas instancias con las condiciones definidas
+    public List<Object> findWithQuery(String query, Class type) {
+        return this.jsonDBInstance().find(query, type);
     }
 }
