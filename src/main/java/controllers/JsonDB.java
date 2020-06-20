@@ -41,7 +41,7 @@ public class JsonDB {
     }
 
     // Retorna la instancia con el id y tipo definido
-    public Object find(String id, Class type) {
+    public Object find(int id, Class type) {
         return this.jsonDBInstance().findById(id, type);
     }
 

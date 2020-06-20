@@ -9,8 +9,7 @@ public class Airplane {
     private int kmCost;
     private int maxPassengers;
     private int kmSpeed;
-    private PropulsionType propulsionType;
-    private int tarifaFija;
+    private String propulsionType;
 
     public int getId() {
         return id;
@@ -52,15 +51,11 @@ public class Airplane {
         this.kmSpeed = kmSpeed;
     }
 
-    public PropulsionType getPropulsionType() {
+    public String getPropulsionType() {
         return propulsionType;
     }
 
-    public void setPropulsionType(PropulsionType propulsionType) {
+    public void setPropulsionType(String propulsionType) {
         this.propulsionType = propulsionType;
-    }
-
-    public float calcularTarifa(int kms, int costo, int pasajeros){
-        return ((kms*costo) + (pasajeros*3500) + this.tarifaFija);
     }
 }
