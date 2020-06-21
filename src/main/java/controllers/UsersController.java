@@ -10,23 +10,23 @@ public class UsersController {
         this.core = core;
     }
 
-    public boolean signUp(User user) {
+    public Response signUp(User user) {
         if(this.getUserByDni(user.getDni()) == null) {
             this.core.getJsonDB().insert(user);
-            return true;
+            return new Response(true, null);
         } else {
-            return false;
+            return new Response(false, "El DNI ingresado ya se encuentra en la base de datos.");
         }
     }
 
-    public boolean login(String dni, String password) {
+    public Response login(String dni, String password) {
         User user = this.getUserByDni(dni);
 
         if(user != null && validatePassword(user, password)) {
             this.session = user;
-            return true;
+            return new Response(true, null);
         } else {
-            return false;
+            return new Response(false, "Usuario o contraseña incorrectos.");
         }
     }
 
@@ -46,9 +46,5 @@ public class UsersController {
 
     public User getSession() {
         return session;
-    }
-
-    public void setSession(User session) {
-        this.session = session;
     }
 }
