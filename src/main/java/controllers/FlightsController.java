@@ -19,16 +19,33 @@ public class FlightsController {
         this.core = core;
     }
 
-    public int newFlight(Flight flight) {
-        int code = 200;
+    public Response newFlight(Flight flight) {
         this.core.getJsonDB().insert(flight);
-        return code;
+        return new Response(true, null);
     }
 
-    public int deleteFlight(Flight flight) {
-        int code = 200;
-        this.core.getJsonDB().remove(flight);
-        return code;
+    public Response deleteFlight(Flight flight) {
+        Response response = new Response(true, null);
+        long daysDifference = 0;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            Date flightDate = format.parse(flight.getDate());
+            Date today = new Date();
+            daysDifference = TimeUnit.DAYS.convert(Math.abs(flightDate.getTime() - today.getTime()), TimeUnit.MILLISECONDS);
+        } catch (ParseException exception) {
+            response.setSuccess(false);
+            response.setMessage("Error al comprobar la fecha del vuelo.");
+        }
+
+        if(daysDifference > 0) {
+            this.core.getJsonDB().remove(flight);
+        } else {
+            response.setSuccess(false);
+            response.setMessage("Solo se pueden cancelar vuelos con uno o más dias de antelación.");
+        }
+
+        return response;
     }
 
     public int getFlightPrice(Travel travel, Airplane airplane, int passengers) {
@@ -40,8 +57,16 @@ public class FlightsController {
     }
 
     public Travel getTravel(String cityFrom, String cityTo) {
+        Travel travel;
         List<Travel> query = (List<Travel>)(List<?>) this.core.getJsonDB().findWithQuery(String.format("/.[cityFrom='%s' and cityTo='%s']", cityFrom, cityTo), Travel.class);
-        return query.get(0);
+
+        try {
+            travel = query.get(0);
+        } catch(NullPointerException exception) {
+            travel = null;
+        }
+
+        return travel;
     }
 
     public List<Flight> getFlightsByDate(String date) {
@@ -50,5 +75,20 @@ public class FlightsController {
 
     public List<Flight> getFlightsByUser(User user) {
         return (List<Flight>)(List<?>) this.core.getJsonDB().findWithQuery(String.format("/.[user.dni='%s']", user.getDni()), Flight.class);
+    }
+
+    public Response validateDate(String string_date) {
+        Response response;
+        Date date;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            date = format.parse(string_date);
+            response = new Response(true, null);
+        } catch (ParseException exception) {
+            response = new Response(true, "El formato de la fecha debe ser: dd-mm-aaaa");
+        }
+
+        return response;
     }
 }
