@@ -10,7 +10,7 @@ public class Airplane {
     private int maxPassengers;
     private int kmSpeed;
     private PropulsionType propulsionType;
-    private int tarifaFija;
+    private int fixedPrice;
 
     public int getId() {
         return id;
@@ -60,7 +60,11 @@ public class Airplane {
         this.propulsionType = propulsionType;
     }
 
-    public float calcularTarifa(int kms, int costo, int pasajeros){
-        return ((kms*costo) + (pasajeros*3500) + this.tarifaFija);
+    public int getFixedPrice() {
+        return fixedPrice;
+    }
+
+    public void setFixedPrice(int fixedPrice) {
+        this.fixedPrice = fixedPrice;
     }
 }

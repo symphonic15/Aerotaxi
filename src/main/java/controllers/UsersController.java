@@ -3,16 +3,16 @@ package controllers;
 import models.users.User;
 
 public class UsersController {
-    private JsonDB jsonDB;
+    private Core core;
     private User session;
 
-    public UsersController() {
-        this.jsonDB = new JsonDB();
+    public UsersController(Core core) {
+        this.core = core;
     }
 
     public boolean signUp(User user) {
         if(this.getUserByDni(user.getDni()) == null) {
-            this.jsonDB.insert(user);
+            this.core.getJsonDB().insert(user);
             return true;
         } else {
             return false;
@@ -33,7 +33,7 @@ public class UsersController {
     /* Helpers */
 
     public User getUserByDni(String dni) {
-        return (User) this.jsonDB.find(dni, User.class);
+        return (User) this.core.getJsonDB().find(dni, User.class);
     }
 
     public boolean validatePassword(User user, String password) {

@@ -11,10 +11,11 @@ import java.util.Date;
 public class Flight {
     @Id
     private int id;
-    private Date date;
+    private String date;
     private Airplane airplane;
     private User user;
     private Travel travel;
+    private int passengers;
 
     public int getId() {
         return id;
@@ -24,11 +25,11 @@ public class Flight {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -54,5 +55,13 @@ public class Flight {
 
     public void setTravel(Travel travel) {
         this.travel = travel;
+    }
+
+    public int getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(int passengers) {
+        this.passengers = passengers;
     }
 }

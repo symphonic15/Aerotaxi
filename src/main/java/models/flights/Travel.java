@@ -11,6 +11,14 @@ public class Travel {
     private String cityTo;
     private int distance;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getCityFrom() {
         return cityFrom;
     }
