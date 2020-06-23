@@ -7,8 +7,8 @@ import io.jsondb.annotation.Id;
 public class Travel {
     @Id
     private int id;
-    private String cityFrom;
-    private String cityTo;
+    private City cityFrom;
+    private City cityTo;
     private int distance;
 
     public int getId() {
@@ -19,19 +19,19 @@ public class Travel {
         this.id = id;
     }
 
-    public String getCityFrom() {
+    public City getCityFrom() {
         return cityFrom;
     }
 
-    public void setCityFrom(String cityFrom) {
+    public void setCityFrom(City cityFrom) {
         this.cityFrom = cityFrom;
     }
 
-    public String getCityTo() {
+    public City getCityTo() {
         return cityTo;
     }
 
-    public void setCityTo(String cityTo) {
+    public void setCityTo(City cityTo) {
         this.cityTo = cityTo;
     }
 

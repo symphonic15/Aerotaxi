@@ -1,6 +1,6 @@
 package models.flights;
 
-public enum Cities {
+public enum City {
     SANTIAGO,
     BUENOS_AIRES,
     CORDOBA,

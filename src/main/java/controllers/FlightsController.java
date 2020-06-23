@@ -1,6 +1,7 @@
 package controllers;
 
 import models.airplanes.Airplane;
+import models.flights.City;
 import models.flights.Flight;
 import models.flights.Travel;
 import models.users.User;
@@ -68,13 +69,13 @@ public class FlightsController {
         return distancePrice + passengersPrice + airplaneFixedPrice;
     }
 
-    public Travel getTravel(String cityFrom, String cityTo) {
+    public Travel getTravel(City cityFrom, City cityTo) {
         Travel travel;
         List<Travel> query = (List<Travel>)(List<?>) this.core.getJsonDB().findWithQuery(String.format("/.[cityFrom='%s' and cityTo='%s']", cityFrom, cityTo), Travel.class);
 
         try {
             travel = query.get(0);
-        } catch(NullPointerException exception) {
+        } catch(Exception exception) {
             travel = null;
         }
 
