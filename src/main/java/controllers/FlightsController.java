@@ -70,12 +70,17 @@ public class FlightsController {
     }
 
     public Travel getTravel(City cityFrom, City cityTo) {
-        Travel travel;
-        List<Travel> query = (List<Travel>)(List<?>) this.core.getJsonDB().findWithQuery(String.format("/.[cityFrom='%s' and cityTo='%s']", cityFrom, cityTo), Travel.class);
+        Travel travel = null;
 
-        try {
-            travel = query.get(0);
-        } catch(Exception exception) {
+        if(cityFrom != cityTo) {
+            List<Travel> query = (List<Travel>)(List<?>) this.core.getJsonDB().findWithQuery(String.format("/.[cityFrom='%s' and cityTo='%s']", cityFrom, cityTo), Travel.class);
+
+            try {
+                travel = query.get(0);
+            } catch(Exception exception) {
+                travel = null;
+            }
+        } else {
             travel = null;
         }
 

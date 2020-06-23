@@ -63,7 +63,7 @@ public class UsersController {
         String airplane = null;
 
         for(Flight flight : core.getFlightsController().getFlightsByUser(user)) {
-            switch(flight.getAirplane().getClass().getSimpleName()) {
+            switch(flight.getCategory()) {
                 case "Bronze":
                     if(airplane == null) {
                         airplane = "Bronze";

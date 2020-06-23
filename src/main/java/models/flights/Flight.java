@@ -13,6 +13,7 @@ public class Flight {
     private Airplane airplane;
     private User user;
     private Travel travel;
+    private String category;
     private int passengers;
     private int price;
 
@@ -54,6 +55,14 @@ public class Flight {
 
     public void setTravel(Travel travel) {
         this.travel = travel;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public int getPassengers() {
