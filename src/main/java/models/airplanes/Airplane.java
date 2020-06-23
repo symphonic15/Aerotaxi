@@ -1,10 +1,12 @@
 package models.airplanes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.jsondb.annotation.Id;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Airplane {
     @Id
-    private int id;
+    private String id;
     private int fuel;
     private int kmCost;
     private int maxPassengers;
@@ -12,15 +14,16 @@ public class Airplane {
     private PropulsionType propulsionType;
     private String name;
 
+
     public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
