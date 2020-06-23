@@ -16,6 +16,19 @@ public class AirplanesController {
         this.core = core;
     }
 
+    // Agrega un avion a la db
+    public Response addAirplane(Airplane airplane) {
+        Response response = new Response(true, null);
+        try {
+            this.core.getJsonDB().insert(airplane);
+        } catch(Exception exception) {
+            response = new Response(false, "Error al agregar avion a la base de datos");
+        }
+
+        return response;
+    }
+
+    // Obtengo todos los aviones cargados
     public List<Airplane> getAllAirplanes() {
         List<Airplane> airplanes = new ArrayList<Airplane>();
 
@@ -30,6 +43,7 @@ public class AirplanesController {
         return airplanes;
     }
 
+    // Obtengo todos los aviones disponibles en la fecha definida
     public List<Airplane> getAvailableAirplanes(String date, int passengers) {
         List<Airplane> freeAirplanes = this.getAllAirplanes();
 
@@ -42,6 +56,7 @@ public class AirplanesController {
         return freeAirplanes;
     }
 
+    // Validador de atributo kmCost
     public Response validateKmCost(int km_cost) {
         if(km_cost >= 150 && km_cost <= 300)
             return new Response(true, null);

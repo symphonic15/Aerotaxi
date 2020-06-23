@@ -20,11 +20,13 @@ public class FlightsController {
         this.core = core;
     }
 
+    // Agrega un vuelo a la db
     public Response newFlight(Flight flight) {
         this.core.getJsonDB().insert(flight);
         return new Response(true, null);
     }
 
+    // Elimina un vuelo de la db
     public Response deleteFlight(Flight flight) {
         Response response = new Response(true, null);
         long daysDifference = 0;
@@ -49,6 +51,7 @@ public class FlightsController {
         return response;
     }
 
+    // Retorna el costo de un vuelo con los datos ingresados
     public int getFlightPrice(Travel travel, Airplane airplane, int passengers) {
         int distancePrice = travel.getDistance() * airplane.getKmCost();
         int passengersPrice = passengers * 3500;
@@ -69,6 +72,7 @@ public class FlightsController {
         return distancePrice + passengersPrice + airplaneFixedPrice;
     }
 
+    // Retorna el recorrido con la ciudad de origen y destino ingresadas
     public Travel getTravel(City cityFrom, City cityTo) {
         Travel travel = null;
 
@@ -87,14 +91,17 @@ public class FlightsController {
         return travel;
     }
 
+    // Retorna todos los vuelos de la fecha ingresada
     public List<Flight> getFlightsByDate(String date) {
         return (List<Flight>)(List<?>) this.core.getJsonDB().findWithQuery(String.format("/.[date='%s']", date), Flight.class);
     }
 
+    // Retorna todos los vuelos realizados por el usuario ingresado
     public List<Flight> getFlightsByUser(User user) {
         return (List<Flight>)(List<?>) this.core.getJsonDB().findWithQuery(String.format("/.[user/dni='%s']", user.getDni()), Flight.class);
     }
 
+    // Valida el formato de la fecha ingresada
     public Response validateDate(String string_date) {
         Response response = new Response(true, null);
         long daysDifference;

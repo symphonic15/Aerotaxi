@@ -6,6 +6,8 @@ public class Core {
     private AirplanesController airplanesController;
     private FlightsController flightsController;
 
+    // Nucleo del backend.
+    // Se creara una sola instancia de esta clase, en la que se inicializara la session del usuario y las clases del controlador
     public Core() {
         this.jsonDB = new JsonDB();
         this.usersController = new UsersController(this);

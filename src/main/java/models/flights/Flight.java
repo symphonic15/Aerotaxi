@@ -8,7 +8,7 @@ import models.users.User;
 @Document(collection = "flights", schemaVersion= "1.0")
 public class Flight {
     @Id
-    private int id;
+    private String id;
     private String date;
     private Airplane airplane;
     private User user;
@@ -17,11 +17,11 @@ public class Flight {
     private int passengers;
     private int price;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
