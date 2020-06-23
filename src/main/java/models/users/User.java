@@ -7,10 +7,15 @@ import io.jsondb.annotation.Id;
 public class User {
     @Id
     private String dni;
+    private UserType userType;
     private String password;
     private String name;
     private String lastName;
     private int edad;
+
+    public UserType getUserType() { return userType; }
+
+    public void setUserType(UserType userType) { this.userType = userType; }
 
     public String getDni() {
         return dni;
