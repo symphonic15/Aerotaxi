@@ -32,7 +32,7 @@ public class FlightsController {
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
             Date flightDate = format.parse(flight.getDate());
             Date today = new Date();
-            daysDifference = TimeUnit.DAYS.convert(Math.abs(flightDate.getTime() - today.getTime()), TimeUnit.MILLISECONDS);
+            daysDifference = TimeUnit.DAYS.convert((flightDate.getTime() - today.getTime()), TimeUnit.MILLISECONDS);
         } catch (ParseException exception) {
             response.setSuccess(false);
             response.setMessage("Error al comprobar la fecha del vuelo.");
@@ -51,7 +51,19 @@ public class FlightsController {
     public int getFlightPrice(Travel travel, Airplane airplane, int passengers) {
         int distancePrice = travel.getDistance() * airplane.getKmCost();
         int passengersPrice = passengers * 3500;
-        int airplaneFixedPrice = airplane.getFixedPrice();
+        int airplaneFixedPrice = 0;
+
+        switch(airplane.getClass().getSimpleName()) {
+            case "Gold":
+                airplaneFixedPrice = 6000;
+                break;
+            case "Silver":
+                airplaneFixedPrice = 4000;
+                break;
+            case "Bronze":
+                airplaneFixedPrice = 3000;
+                break;
+        }
 
         return distancePrice + passengersPrice + airplaneFixedPrice;
     }
@@ -74,19 +86,24 @@ public class FlightsController {
     }
 
     public List<Flight> getFlightsByUser(User user) {
-        return (List<Flight>)(List<?>) this.core.getJsonDB().findWithQuery(String.format("/.[user.dni='%s']", user.getDni()), Flight.class);
+        return (List<Flight>)(List<?>) this.core.getJsonDB().findWithQuery(String.format("/.[user/dni='%s']", user.getDni()), Flight.class);
     }
 
     public Response validateDate(String string_date) {
-        Response response;
-        Date date;
+        Response response = new Response(true, null);
+        long daysDifference;
 
         try {
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-            date = format.parse(string_date);
-            response = new Response(true, null);
+            Date date = format.parse(string_date);
+            Date today = new Date();
+            daysDifference = TimeUnit.DAYS.convert((date.getTime() - today.getTime()), TimeUnit.MILLISECONDS);
+
+            if(daysDifference <= 0) {
+                response = new Response(false, "La fecha del vuelo debe ser por lo menos un dia mayor a la actual.");
+            }
         } catch (ParseException exception) {
-            response = new Response(true, "El formato de la fecha debe ser: dd-mm-aaaa");
+            response = new Response(false, "El formato de la fecha debe ser: dd-mm-aaaa");
         }
 
         return response;

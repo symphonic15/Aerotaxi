@@ -10,7 +10,6 @@ public class Airplane {
     private int maxPassengers;
     private int kmSpeed;
     private PropulsionType propulsionType;
-    private int fixedPrice;
 
     public int getId() {
         return id;
@@ -58,13 +57,5 @@ public class Airplane {
 
     public void setPropulsionType(PropulsionType propulsionType) {
         this.propulsionType = propulsionType;
-    }
-
-    public int getFixedPrice() {
-        return fixedPrice;
-    }
-
-    public void setFixedPrice(int fixedPrice) {
-        this.fixedPrice = fixedPrice;
     }
 }
