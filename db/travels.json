@@ -1,0 +1,13 @@
+{"schemaVersion":"1.0"}
+{"id":1,"cityFrom":"BUENOS_AIRES","cityTo":"CORDOBA","distance":695}
+{"id":2,"cityFrom":"CORDOBA","cityTo":"BUENOS_AIRES","distance":695}
+{"id":3,"cityFrom":"BUENOS_AIRES","cityTo":"MONTEVIDEO","distance":950}
+{"id":4,"cityFrom":"MONTEVIDEO","cityTo":"BUENOS_AIRES","distance":950}
+{"id":5,"cityFrom":"BUENOS_AIRES","cityTo":"SANTIAGO","distance":1400}
+{"id":6,"cityFrom":"SANTIAGO","cityTo":"BUENOS_AIRES","distance":1400}
+{"id":7,"cityFrom":"MONTEVIDEO","cityTo":"CORDOBA","distance":1190}
+{"id":8,"cityFrom":"CORDOBA","cityTo":"MONTEVIDEO","distance":1190}
+{"id":9,"cityFrom":"SANTIAGO","cityTo":"CORDOBA","distance":1050}
+{"id":10,"cityFrom":"CORDOBA","cityTo":"SANTIAGO","distance":1050}
+{"id":11,"cityFrom":"SANTIAGO","cityTo":"MONTEVIDEO","distance":2100}
+{"id":12,"cityFrom":"MONTEVIDEO","cityTo":"SANTIAGO","distance":2100}

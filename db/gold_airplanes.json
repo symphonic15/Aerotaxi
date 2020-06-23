@@ -1,0 +1,2 @@
+{"schemaVersion":"1.0"}
+{"id":"b2fe5d6b-30d7-4ee2-b656-ab636d4a4b67","fuel":0,"kmCost":160,"maxPassengers":10,"kmSpeed":2000,"propulsionType":"MOTOR_DE_PISTONES","name":"El gran avion","catering":{"foods":["fideos"],"drinks":["coca cola"]},"wifi":true}
