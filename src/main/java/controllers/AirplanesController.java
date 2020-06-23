@@ -41,4 +41,11 @@ public class AirplanesController {
 
         return freeAirplanes;
     }
+
+    public Response validateKmCost(int km_cost) {
+        if(km_cost >= 150 && km_cost <= 300)
+            return new Response(true, null);
+        else
+            return new Response(false, "El costo por kilometro debe ser de entre $150 y $300");
+    }
 }
