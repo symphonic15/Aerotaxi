@@ -1,6 +1,9 @@
 package controllers;
 
+import models.flights.Flight;
 import models.users.User;
+
+import java.util.List;
 
 public class UsersController {
     private Core core;
@@ -30,6 +33,10 @@ public class UsersController {
         }
     }
 
+    public List<User> getAllUsers() {
+        return (List<User>)(List<?>) this.core.getJsonDB().findAll(User.class);
+    }
+
     /* Helpers */
 
     public User getUserByDni(String dni) {
@@ -40,6 +47,44 @@ public class UsersController {
         if(user.getPassword().equals(password))
             return true;
         return false;
+    }
+
+    public int getTotalSpent(User user) {
+        int totalSpent = 0;
+
+        for(Flight flight : core.getFlightsController().getFlightsByUser(user)) {
+            totalSpent += flight.getPrice();
+        }
+
+        return totalSpent;
+    }
+
+    public String getTopAirplane(User user) {
+        String airplane = null;
+
+        for(Flight flight : core.getFlightsController().getFlightsByUser(user)) {
+            switch(flight.getAirplane().getClass().getSimpleName()) {
+                case "Bronze":
+                    if(airplane == null) {
+                        airplane = "Bronze";
+                    }
+                    break;
+                case "Silver":
+                    if(airplane == null || airplane.equals("Bronze")) {
+                        airplane = "Silver";
+                    }
+                    break;
+                case "Gold":
+                    airplane = "Gold";
+                    break;
+            }
+        }
+
+        if(airplane == null) {
+            airplane = "Sin vuelos";
+        }
+
+        return airplane;
     }
 
     /* Getters and setters */
