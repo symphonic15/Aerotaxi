@@ -49,7 +49,7 @@ public class AirplanesController {
 
         for(Flight flight : this.core.getFlightsController().getFlightsByDate(date)) {
             freeAirplanes.removeIf(airplane -> {
-                return airplane.getId() == flight.getAirplane().getId() || airplane.getMaxPassengers() < passengers;
+                return airplane.getId().equals(flight.getAirplane().getId()) || airplane.getMaxPassengers() < passengers;
             });
         }
 
